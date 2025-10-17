@@ -4,6 +4,18 @@ o Consultar la lista de usuarios registrados.
 o Generar una notificación (por correo electrónico) cada vez que se cree
 un usuario. -->
 
+<!--
+Entrega del Ejercicio 1:
+• URL de los repositorios Git.
+• Código fuente del frontend y backend funcionando localmente.
+• Capturas de pantalla funcionamiento completo y del envío de notificaciones.
+• Breve descripción de dependencias y estructura del proyecto.
+Este ejercicio constituye la base funcional del proyecto. En el siguiente paso la
+funcionalidad de notificación se separará en un microservicio independiente y se
+desplegará en la nube.
+-->
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,6 +32,13 @@ un usuario. -->
         <div class="container">
             <h1>Bienvenido</h1>
             <button onclick="window.location.href='registroUsuario.html'">Registro Usuario</button>
+            <div class="MostrarUsuarios">
+                <button id="btnMostrarUsuarios">Mostrar Usuarios</button>
+                <div id="listaUsuarios">
+                    
+                </div>
+                
+            </div>
         </div>
     </body>
 
