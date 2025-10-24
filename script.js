@@ -3,20 +3,21 @@ const API_BASE = 'http://127.0.0.1:8000/api';
 
 async function listarUsuarios() {
 	try {
-		const res = await fetch(`${API_BASE}/usuarios/`);
-		if (!res.ok) throw new Error(`Error ${res.status}`);
-		const data = await res.json();
-		const list = document.createElement('ul');
-		data.forEach(u => {
-			const li = document.createElement('li');
-			li.textContent = `${u.id} - ${u.nombre} (${u.email}) - ${u.telefono}`;
-			list.appendChild(li);
-		});
-		const container = document.querySelector('.container');
-		if (container) container.appendChild(list);
-	} catch (err) {
-		console.error('Listar usuarios:', err);
-	}
+        const res = await fetch(`${API_BASE}/usuarios/`);
+        if (!res.ok) throw new Error(`Error ${res.status}`);
+        const data = await res.json();
+        const list = document.createElement('ul');
+        data.forEach(u => {
+            const li = document.createElement('li');
+            li.textContent = `${u.id} - ${u.nombre} (${u.email}) - ${u.telefono}`;
+            list.appendChild(li);
+        });
+        const listaUsuarios = document.getElementById('listaUsuarios');
+        listaUsuarios.innerHTML = ''; // Limpiar contenido previo
+        listaUsuarios.appendChild(list);
+    } catch (err) {
+        console.error('Listar usuarios:', err);
+    }
 }
 
 // Si estamos en la página de registro, conectamos el form
