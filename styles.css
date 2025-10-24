@@ -1,0 +1,133 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fondo y centrado general */
+body {
+  background: linear-gradient(135deg, #0078d7, #00bcd4);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor principal */
+.container {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Títulos */
+h1 {
+  margin-bottom: 1.5rem;
+  color: #0078d7;
+}
+
+/* Botones generales */
+button {
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0.5rem 0;
+}
+
+button:hover {
+  background-color: #005fa3;
+  transform: scale(1.03);
+}
+
+/* Inputs y etiquetas */
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  margin-top: 1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+input {
+  padding: 0.6rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: #0078d7;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
+}
+
+/* Mensaje de confirmación */
+#mensaje {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #0078d7;
+}
+
+/* Enlace volver */
+a {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: #0078d7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Sección de usuarios */
+.MostrarUsuarios {
+  margin-top: 1.5rem;
+}
+
+#listaUsuarios {
+  margin-top: 1rem;
+  text-align: left;
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+#listaUsuarios p {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 2rem;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+  button {
+    width: 100%;
+  }
+}
