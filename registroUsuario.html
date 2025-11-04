@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +7,6 @@
     <title>Registro de Usuario</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -27,6 +24,37 @@
 
             <button type="submit">Registrar</button>
         </form>
-        <div id="mensaje"></div>
-        <a href="index.html">Volver al Inicio</a>
+
+        <div id="mensaje" style="margin-top:15px; font-weight:bold;"></div>
+
+        <a href="index.html" style="display:block; margin-top:15px;">Volver al Inicio</a>
     </div>
+
+    <script>
+    document.getElementById("registroForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById("nombre").value;
+        const email = document.getElementById("email").value;
+        const telefono = document.getElementById("telefono").value;
+
+        const datosUsuario = {
+            nombre: nombre,
+            email: email,
+            telefono: telefono
+        };
+
+        try {
+            const respuesta = await axios.post("http://127.0.0.1:8000/api/usuarios/", datosUsuario);
+            document.getElementById("mensaje").innerHTML = "✅ Usuario registrado correctamente. Revisá tu correo.";
+            document.getElementById("mensaje").style.color = "green";
+            document.getElementById("registroForm").reset();
+        } catch (error) {
+            console.error("❌ Error al registrar:", error);
+            document.getElementById("mensaje").innerHTML = "⚠️ Error al registrar el usuario.";
+            document.getElementById("mensaje").style.color = "red";
+        }
+    });
+    </script>
+</body>
+</html>
