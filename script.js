@@ -1,5 +1,10 @@
 // script.js - Conexión simple frontend <-> backend (Django REST)
-const API_BASE = 'http://127.0.0.1:8000/api';
+// Detecta automáticamente la URL del API según el entorno
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000/api'
+  : `${window.location.protocol}//${window.location.host}/api`;
+
+
 
 async function listarUsuarios() {
 	try {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+    <title>Usuarios Registrados</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -12,11 +12,50 @@
 </head>
 <body>
     <div class="container">
-        <h1>Usuarios:</h1>
-        <div id="listaUsuarios"></div>
-        <button onclick="window.location.href='index.html'">Volver al Inicio</button>
+        <h1>👥 Usuarios Registrados</h1>
+        <div id="listaUsuarios">
+            <p style="text-align: center; color: #999;">Cargando usuarios...</p>
+        </div>
+        <button onclick="window.location.href='index.html'" style="margin-top: 2rem;">⬅️ Volver al Inicio</button>
     </div>
     <script>
+        // Detecta automáticamente la URL del API según el entorno
+        const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+          ? 'http://localhost:8000/api'
+          : `${window.location.protocol}//${window.location.host}/api`;
+
+        async function listarUsuarios() {
+            try {
+                const res = await fetch(`${API_BASE}/usuarios/`);
+                if (!res.ok) throw new Error(`Error ${res.status}`);
+                const data = await res.json();
+                
+                const listaUsuarios = document.getElementById('listaUsuarios');
+                listaUsuarios.innerHTML = ''; // Limpiar contenido previo
+                
+                if (data.length === 0) {
+                    listaUsuarios.innerHTML = '<p style="text-align: center; color: #999;">No hay usuarios registrados.</p>';
+                    return;
+                }
+                
+                const ul = document.createElement('ul');
+                data.forEach(u => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <strong>${u.nombre}</strong><br>
+                        📧 ${u.email}<br>
+                        📱 ${u.telefono}
+                    `;
+                    ul.appendChild(li);
+                });
+                listaUsuarios.appendChild(ul);
+            } catch (err) {
+                console.error('Listar usuarios:', err);
+                const listaUsuarios = document.getElementById('listaUsuarios');
+                listaUsuarios.innerHTML = `<p style="text-align: center; color: red;">❌ Error al cargar usuarios: ${err.message}</p>`;
+            }
+        }
+
         // Llama a listarUsuarios cuando se cargue la página
         document.addEventListener('DOMContentLoaded', () => {
             listarUsuarios();

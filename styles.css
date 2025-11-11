@@ -20,16 +20,36 @@ body {
   background-color: #ffffff;
   padding: 2.5rem;
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   text-align: center;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Títulos */
 h1 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   color: #0078d7;
+  font-size: 2rem;
+}
+
+/* Párrafos descriptivos */
+p {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
 }
 
 /* Botones generales */
@@ -38,16 +58,46 @@ button {
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 0.8rem 1.2rem;
+  padding: 0.8rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   margin: 0.5rem 0;
+  font-weight: 600;
 }
 
 button:hover {
   background-color: #005fa3;
-  transform: scale(1.03);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 120, 215, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Botones por tipo */
+.btn-primary {
+  background-color: #0078d7;
+  width: 100%;
+  margin: 0.7rem 0;
+}
+
+.btn-secondary {
+  background-color: #00bcd4;
+  width: 100%;
+  margin: 0.7rem 0;
+}
+
+.btn-secondary:hover {
+  background-color: #0097a7;
+}
+
+/* Grupo de botones */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
 
 /* Inputs y etiquetas */
@@ -61,27 +111,65 @@ label {
   margin-top: 1rem;
   color: #333;
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 input {
-  padding: 0.6rem;
+  padding: 0.7rem;
   margin-top: 0.4rem;
-  border: 1px solid #ccc;
+  border: 2px solid #ddd;
   border-radius: 8px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1rem;
 }
 
 input:focus {
   border-color: #0078d7;
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
+  box-shadow: 0 0 8px rgba(0, 120, 215, 0.4);
+}
+
+input[type="submit"] {
+  margin-top: 1.5rem;
+  padding: 0.9rem;
+  background-color: #0078d7;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #005fa3;
 }
 
 /* Mensaje de confirmación */
 #mensaje {
   margin-top: 1rem;
   font-weight: 600;
-  color: #0078d7;
+  padding: 0.8rem;
+  border-radius: 8px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#mensaje.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #c62828;
+}
+
+#mensaje.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #2e7d32;
 }
 
 /* Enlace volver */
@@ -90,10 +178,12 @@ a {
   margin-top: 1.5rem;
   color: #0078d7;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 a:hover {
+  color: #005fa3;
   text-decoration: underline;
 }
 
@@ -106,28 +196,78 @@ a:hover {
   margin-top: 1rem;
   text-align: left;
   background: #f8f9fa;
-  padding: 1rem;
+  padding: 1.2rem;
   border-radius: 10px;
-  max-height: 250px;
+  max-height: 350px;
   overflow-y: auto;
+  border: 1px solid #e0e0e0;
 }
 
-#listaUsuarios p {
-  padding: 0.4rem 0;
+#listaUsuarios ul {
+  list-style: none;
+}
+
+#listaUsuarios li {
+  padding: 0.8rem;
   border-bottom: 1px solid #ddd;
   color: #333;
+  transition: background-color 0.2s ease;
+}
+
+#listaUsuarios li:last-child {
+  border-bottom: none;
+}
+
+#listaUsuarios li:hover {
+  background-color: #e3f2fd;
+  border-radius: 5px;
+}
+
+/* Scrollbar personalizado */
+#listaUsuarios::-webkit-scrollbar {
+  width: 8px;
+}
+
+#listaUsuarios::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+#listaUsuarios::-webkit-scrollbar-thumb {
+  background: #0078d7;
+  border-radius: 10px;
+}
+
+#listaUsuarios::-webkit-scrollbar-thumb:hover {
+  background: #005fa3;
 }
 
 /* Responsive */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .container {
-    width: 90%;
-    padding: 2rem;
+    width: 95%;
+    padding: 1.8rem;
   }
+
   h1 {
     font-size: 1.6rem;
   }
-  button {
+
+  button, input[type="submit"] {
     width: 100%;
+    padding: 0.75rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  label {
+    margin-top: 0.8rem;
+  }
+
+  input {
+    padding: 0.6rem;
+    font-size: 16px; /* Evita zoom en iOS */
   }
 }

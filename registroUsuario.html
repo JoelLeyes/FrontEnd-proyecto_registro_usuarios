@@ -31,6 +31,11 @@
     </div>
 
     <script>
+    // Detecta automáticamente la URL del API según el entorno
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:8000/api'
+      : `${window.location.protocol}//${window.location.host}/api`;
+
     document.getElementById("registroForm").addEventListener("submit", async function (event) {
         event.preventDefault();
 
@@ -45,13 +50,13 @@
         };
 
         try {
-            const respuesta = await axios.post("http://127.0.0.1:8000/api/usuarios/", datosUsuario);
+            const respuesta = await axios.post(`${API_BASE}/usuarios/`, datosUsuario);
             document.getElementById("mensaje").innerHTML = "✅ Usuario registrado correctamente. Revisá tu correo.";
             document.getElementById("mensaje").style.color = "green";
             document.getElementById("registroForm").reset();
         } catch (error) {
             console.error("❌ Error al registrar:", error);
-            document.getElementById("mensaje").innerHTML = "⚠️ Error al registrar el usuario.";
+            document.getElementById("mensaje").innerHTML = "⚠️ Error al registrar el usuario: " + (error.response?.data?.detail || error.message);
             document.getElementById("mensaje").style.color = "red";
         }
     });
